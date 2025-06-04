@@ -133,6 +133,16 @@ impl<D: Driver> Printer<D> {
         Ok(self)
     }
 
+    pub fn return_flush(&mut self) -> Result<Vec<u8>> {
+        let mut out = vec![];
+
+        for instruction in self.instructions.iter() {
+            out.append(&mut instruction.flatten_commands());
+        }
+
+        Ok(out)
+    }
+
     /// Set debug mode
     pub fn debug_mode(&mut self, mode: Option<DebugMode>) -> &mut Self {
         self.options.debug_mode(mode);

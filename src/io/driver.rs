@@ -40,6 +40,25 @@ pub trait Driver {
     fn flush(&self) -> Result<()>;
 }
 
+pub struct DummyDriver {}
+impl Driver for DummyDriver {
+    fn name(&self) -> String {
+        "dummy".to_owned()
+    }
+
+    fn write(&self, _data: &[u8]) -> Result<()> {
+        Ok(())
+    }
+
+    fn read(&self, _buf: &mut [u8]) -> Result<usize> {
+        Ok(0)
+    }
+
+    fn flush(&self) -> Result<()> {
+        Ok(())
+    }
+}
+
 // ================ Console driver ================
 
 /// Console driver for debug

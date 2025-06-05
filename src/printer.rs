@@ -140,6 +140,9 @@ impl<D: Driver> Printer<D> {
             out.append(&mut instruction.flatten_commands());
         }
 
+        self.instructions = vec![];
+        self.reset_style_state();
+
         Ok(out)
     }
 
